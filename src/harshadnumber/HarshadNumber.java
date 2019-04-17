@@ -3,30 +3,27 @@ package harshadnumber;
 import java.util.Scanner;
 
 public class HarshadNumber {
+
     public static void main(String[] args) {
+	Scanner in = new Scanner(System.in);
+
+	int n = Integer.parseInt(in.nextLine());
+	while (!isHarshad(n))
+	    n++;
+	System.out.println(n);
 	
-	Scanner scanner = new Scanner(System.in);
-	String input = scanner.nextLine();
-	
-	int[] numbers = new int[input.length()];
-	for (int i=0; i<input.length(); i++) {
-	    numbers[i] = Integer.parseInt(input.split("")[i]);
-	}
-	
-	int divideNumber = 0;
-	for (int i=0; i< numbers.length; i++) {
-	    divideNumber += (int) numbers[i];
-	}
-//	System.out.println("divideNumber: " + divideNumber);
-	
-	int result = Integer.parseInt(input) % divideNumber;
-//	System.out.println("result: " + result);
-	if (result == 0) {
-	    System.out.println(Integer.parseInt(input));
-	} else {
-	    System.out.println(Integer.parseInt(input) + (divideNumber - result)); 
-	}
-	
-	scanner.close();
+	in.close();
+    }
+
+    public static boolean isHarshad(int n) {
+	return n % sumDigits(n) == 0;
+    }
+
+    public static int sumDigits(int n) {
+	String num = Integer.toString(n);
+	int sum = 0;
+	for (int i = 0; i < num.length(); i++)
+	    sum += Integer.parseInt(num.substring(i, i + 1));
+	return sum;
     }
 }
